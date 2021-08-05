@@ -1,0 +1,9 @@
+INDEX VERSION 1.4+C:\Users\kenne\Documents\Skillstorm\Project 1\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+4208989263.index
+897373855.index
+897373855.index
+1830134262.index
+2503665781.index
+3386370517.index
+382831797.index
+1700714057.index

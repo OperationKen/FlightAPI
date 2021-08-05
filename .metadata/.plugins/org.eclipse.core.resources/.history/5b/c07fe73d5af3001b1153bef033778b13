@@ -1,0 +1,40 @@
+package com.skillstorm.servlet;
+
+import java.io.IOException;
+import java.util.concurrent.CopyOnWriteArrayList;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.skillstorm.beans.Flight;
+
+
+@WebServlet(name="flight-Servlet", urlPatterns = "/flight")
+public class servletFlight extends HttpServlet{
+
+	private CopyOnWriteArrayList<Flight> flightList = new CopyOnWriteArrayList<>();
+	
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		/*ObjectMapper mapper = new ObjectMapper();
+		String json = mapper.writeValueAsString(flightList);
+		resp.getWriter().print(json);
+		resp.setContentType("application/json");*/
+		System.out.println("GET");
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		/*ObjectMapper mapper = new ObjectMapper();
+		Flight home = mapper.readValue(req.getInputStream(), Flight.class);
+		flightList.add(home);
+		resp.setStatus(201);*/
+		System.out.println("POST");
+	}
+	
+	
+}

@@ -1,0 +1,76 @@
+package com.skillstorm.data;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Date;
+import java.util.HashSet;
+import java.util.Set;
+
+
+import com.skillstorm.beans.Flight;
+
+public class FlightDAO {
+	
+	//before
+	//execute the SQL script
+	static String url = "jdbc:mysql://localhost:3306/flightapijdbc";
+	static String username = "root";
+	static String password = "root";
+	private static FlightDAO instance;
+	
+	private FlightDAO() {
+		
+	}
+	public static FlightDAO getInstance() {
+		if(instance == null) {
+			instance = new FlightDAO();
+		}
+		return instance;
+	}
+	
+	public static Flight create(Flight flight) throws SQLException{
+		Connection conn = DriverManager.getConnection(url, username, password);
+		try {
+			conn.setAutoCommit(false);
+			String sql = "insert into flight(from_airport, to_airport, departure, arrival, flight_number) values(?,?,?,?,?)";
+			PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			
+			stmt.setString(1,  flight.getFromAirport());
+			stmt.setString(2, flight.getToAirport());
+			stmt.setDate(3, flight.getDeparture());
+			stmt.setDate(4, flight.getArrival());
+			stmt.setString(5, flight.getFlightNumber());
+			
+		}
+		
+		return flight;
+	}
+	
+	public Set<Flight> findAll() throws SQLException{
+		Set<Flight> flights = new HashSet<>();
+		try(Connection conn = DriverManager.getConnection(url, username, password)){
+			String sql = "SELECT * FROM FLIGHT";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery();
+			while(rs.next()) {
+				int id = rs.getInt("id");
+				String fromAirport = rs.getString("from_airport");
+				String toAirport = rs.getString("to_airport");
+				Date departure = rs.getDate("departure");
+				Date arrival = rs.getDate("arrival");
+				String flightNumber = rs.getString("flight_number");
+				
+				Flight flight = new Flight(id, fromAirport, toAirport, departure, arrival, flightNumber);
+				flights.add(flight);
+			}
+		}
+		return flights;
+	}
+	
+	//after
+	//drop the table
+}
