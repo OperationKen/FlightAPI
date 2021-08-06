@@ -1,0 +1,89 @@
+package com.skillstorm.data;
+
+import static org.junit.Assert.*;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.List;
+import java.util.Set;
+
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import com.skillstorm.beans.Flight;
+
+public class FlightDAOTest {
+
+	//Use different schema to test table
+	static String url = "jdbc:mysql://localhost:3306/flightapijdbc";
+	static String username = "root";
+	static String password = "root";
+	
+	FlightDAO dao = new FlightDAO();
+	
+	@Test
+	public void testCreate() throws SQLException {
+		try{
+			Connection conn = DriverManager.getConnection(url, username, password);
+			System.out.println("Creating an entry");
+		    String sql = "select count(*) from flight";  
+			Statement stmt = conn.createStatement();
+		    ResultSet rs = stmt.executeQuery(sql);
+		    rs.next();
+		    int rowBefore = rs.getInt(1);
+		    FlightDAO.create(new Flight("DFW", "DEN", "2020-05-06", "2020-05-07", "12345-6567"));
+		    ResultSet rs2 = stmt.executeQuery(sql);
+		    rs2.next();
+		    int rowsAfter = rs2.getInt(1);
+		    assertEquals(rowsAfter, ++rowBefore);
+		}catch(Exception e) {
+			fail();
+		}
+	}
+	
+	@Test
+	public void testDelete() throws SQLException {
+		try{
+			System.out.println("Deleting an entry");
+		    Flight a = FlightDAO.findByID(0);
+			System.out.println("Deleting an entry");
+
+		    FlightDAO.delete(0);
+		    assertTrue(a == null);
+		}catch(Exception e) {
+			fail();
+		}
+	}
+	
+	@BeforeClass //create
+	public static void beforeTest() {
+		try(Connection conn = DriverManager.getConnection(url, username, password)){
+			String sql = "create table `flightapijdbc`.`flight` (id INT NOT NULL AUTO_INCREMENT, from_airport VARCHAR(50), to_airport VARCHAR(50), departure VARCHAR(50), arrival VARCHAR(50), flight_number VARCHAR(50), PRIMARY KEY (id) );";
+			//String hardCodeSQL = "INSERT INTO flight(from_airport, to_airport, departure, arrival, flight_number) VALUES(DFW, DEN, 2020-05-06, 2020-05-07, 12345-6567)";
+			Statement stmt = conn.createStatement();
+			System.out.println("Test table created");
+			stmt.executeUpdate(sql);
+		}catch(Exception e) {
+			fail();
+		}
+	}
+
+	@AfterClass //drop
+	public static void afterTest() {
+		try(Connection conn = DriverManager.getConnection(url, username, password)){
+			String sql = "DROP TABLE flight";
+			Statement stmt = conn.createStatement();
+			stmt.executeUpdate(sql);
+			System.out.println("Test table dropped");
+			conn.close();
+		}catch(Exception e) {
+			fail();
+		}
+	}
+}

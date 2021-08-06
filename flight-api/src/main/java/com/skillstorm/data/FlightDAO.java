@@ -46,7 +46,6 @@ public class FlightDAO {
 	public static Flight create(Flight flight) throws SQLException{
 		Connection conn = DriverManager.getConnection(url, username, password);
 		try {
-			System.out.println(flight);
 			conn.setAutoCommit(false);
 			String sql = "INSERT INTO flight(from_airport, to_airport, departure, arrival, flight_number) VALUES(?,?,?,?,?)";
 			PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -64,7 +63,6 @@ public class FlightDAO {
 			rs.next();
 			int id = rs.getInt(1);
 			flight.setId(id);
-			System.out.println(flight);
 		}catch(SQLException e) {
 			e.printStackTrace();
 			conn.rollback();
@@ -73,14 +71,18 @@ public class FlightDAO {
 		return flight;
 	}
 	
-	public static void delete(int id) {
+	public static Flight findByID(int id) {
 		try(Connection conn = DriverManager.getConnection(url, username, password)) {
-			String deleter = "DELETE FROM flight WHERE id=?";
-			PreparedStatement stmt = conn.prepareStatement(deleter);
+			String sql = "SELECT * FROM flight WHERE id=?";
+			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, id);
-			stmt.executeUpdate();
+			ResultSet rs = stmt.executeQuery();
+			rs.next();
+			Flight flight = resultSetFlight(rs);
+			return flight;
 		}catch(SQLException e) {
 			e.printStackTrace();
+			return null;
 		}
 	}
 	
@@ -98,21 +100,6 @@ public class FlightDAO {
 			e.printStackTrace();
 		}
 		return flights;
-	}
-	
-	public static Flight findByID(int id) {
-		try(Connection conn = DriverManager.getConnection(url, username, password)) {
-			String sql = "SELECT * FROM flight WHERE id=?";
-			PreparedStatement stmt = conn.prepareStatement(sql);
-			stmt.setInt(1, id);
-			ResultSet rs = stmt.executeQuery();
-			rs.next();
-			Flight flight = resultSetFlight(rs);
-			return flight;
-		}catch(SQLException e) {
-			e.printStackTrace();
-			return null;
-		}
 	}
 	
 	public static boolean update(Flight flight) {
@@ -134,6 +121,17 @@ public class FlightDAO {
 		return false;
 	}
 	
+	public static void delete(int id) {
+		try(Connection conn = DriverManager.getConnection(url, username, password)) {
+			String deleter = "DELETE FROM flight WHERE id=?";
+			PreparedStatement stmt = conn.prepareStatement(deleter);
+			stmt.setInt(1, id);
+			stmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 	private static Flight resultSetFlight(ResultSet rs) {
 		try {
 			int id = rs.getInt("id");

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="FlightDAOTest (1)" project="flight-api" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="com.skillstorm.data.FlightDAOTest" time="0.004" displayname="FlightDAOTest" uniqueid="[engine:junit-vintage]/[runner:com.skillstorm.data.FlightDAOTest]">
+    <testcase name="testInsert" classname="com.skillstorm.data.FlightDAOTest" time="0.004" displayname="testInsert" uniqueid="[engine:junit-vintage]/[runner:com.skillstorm.data.FlightDAOTest]/[test:testInsert(com.skillstorm.data.FlightDAOTest)]"/>
+  </testsuite>
+</testrun>
