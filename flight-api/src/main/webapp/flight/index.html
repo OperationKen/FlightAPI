@@ -1,63 +1,86 @@
 <!DOCTYPE html>
 <html> 
     <head>
-        <title>Flight</title>
+        <title>Ken's Flight Application</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="stylesheet" href="styles.css" />
         
+        <!--.Classes, tags and #id's that have been defined in this html-->
         <style>
-            #flight-list {
-                background-color: #3b444b;
-            }
             .boxes {
                 padding: 50px;
             }
             .submit-button{
-                background-color: green;
+                background-color: #8DA47E;
                 border: black;
             }
             .delete-button{
-                background-color: #bf0000;
+                background-color: #E9BBB5;
                 border: black;
             }
             .edit-button{
-                background-color: #1E90FF;
+                background-color: #E8D595;
                 border: black;
             }
             .form-group{
-                font-family: "Lucida Console", "Courier New", monospace;
+                font-family: "Optima", monospace;
+            }
+            .display-1{
+                
+            }
+            .display-5{
+                text-align: center;
+            }
+            table{
+                border-collapse: collapse;
+                width: 100%;
+            }
+            td{
+                font-family: "Calibri";
+                font-size: 20px;
+                text-align: center;
+            }
+            tr{
+                font-family: "Calibri";
+                font-size: 20px;
+                text-align: center;
+                background-color: #CCD4BF;
             }
         </style>
     </head>
-    <body style="background-color:#A9B8B2;"></body>
+    <body style="background-color:#AAD9CD;"></body>
     <body>
 
         <!-- Flight App header + Adding Flight -->
         <div class="container-fluid">
-            <div><h1>Flight App</h1></div>
+            <div><h1 class="display-1">Flight App</h1></div>
             <div class="row">
-                <div class="col-lg-6">
-                    <h2>Add Flight</h2>
+                <div class="row align-items-center">
+                    <h2 class="display-5">Add Flight</h2>
                     <form id="add-flight" method="post" action ="/flight-api/flight">
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label>From</label>
                             <input class="form-control" id="fromAirport" type="text" />
+                        </div> -->
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="fromAirport" placeholder="Text">
+                            <label for="fromAirport">From:</label>
                         </div>
-                        <div class="form-group">
-                            <label>To</label>
-                            <input class="form-control" id="toAirport" type="text" />
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="toAirport" placeholder="Text">
+                            <label for="toAirport">To:</label>
                         </div>
-                        <div class="form-group">
-                            <label>Departure</label>
-                            <input class="form-control" id="departure" type="text" />
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="departure" placeholder="Text">
+                            <label for="departure">Departure:</label>
                         </div>
-                        <div class="form-group">
-                            <label>Arrival</label>
-                            <input class="form-control" id="arrival" type="text" />
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="arrival" placeholder="Text">
+                            <label for="arrival">Arrival:</label>
                         </div>
-                        <div class="form-group">
-                            <label>Flight Number</label>
-                            <input class="form-control" id="flightNumber" type="text" />
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="flightNumber" placeholder="Text">
+                            <label for="flightNumber">Flight Number:</label>
                         </div>
                         <div>
                             <input class="btn btn-primary submit-button" type="submit" value="Submit" />
@@ -67,8 +90,8 @@
 
                 <!-- Flight table formatting -->
                 <div id="flight-data" class="center">
-                    <h2>View Flights</h2>
-                    <table class="table" id="flight-data">
+                    <h2 class="display-5">View Flights</h2>
+                    <table border="6" bordercolor="#ffffff" class="table" id="flight-data">
                         <tr><th>From</th><th>To</th><th>Departure</th><th>Arrival</th><th>Flight Number</th><th>Options</th></tr>
                         <tbody id = "flightTable">
                             <!-- Function to GET and populate table -->
@@ -77,7 +100,7 @@
                 </div>
             </div>   
 
-            <!-- Modal Setup-->      
+            <!-- Modal Setup, All from the documentation-->      
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
@@ -121,7 +144,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
         </body>
 
-        <!-- Beginning of Javascript code -->
+<!----- Beginning of Javascript code ------------------------>
         <script type="text/javascript">
 
         //Add in the entry into the table.
