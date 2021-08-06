@@ -5,4 +5,11 @@ h1 {
 }
 h2 {
     color:#177070;
+    text-align: center;
+    padding: 50px;
+}
+.add-flight {
+    display:block;
+    margin-right: auto;
+    margin-left: auto;
 }

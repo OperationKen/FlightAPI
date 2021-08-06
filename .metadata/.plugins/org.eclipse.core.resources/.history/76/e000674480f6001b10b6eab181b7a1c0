@@ -104,6 +104,7 @@ public class FlightDAOTest {
 		    rs.next();
 		    //Moves cursor to last row
 		    int noDel = rs.getInt("count(*)");
+		    
 		    FlightDAO.delete(3);
 		    ResultSet rs2 = stmt.executeQuery(sql);
 		    rs2.next();

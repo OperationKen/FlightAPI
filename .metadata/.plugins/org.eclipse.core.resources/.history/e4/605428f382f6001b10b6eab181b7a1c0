@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
+
 
 import com.skillstorm.beans.Flight;
 
@@ -87,7 +87,7 @@ public class FlightDAO {
 	}
 	
 	public Set<Flight> findAll(){
-		Set<Flight> flights = new TreeSet<>();
+		Set<Flight> flights = new HashSet<>();
 		try(Connection conn = DriverManager.getConnection(url, username, password)){
 			String sql = "SELECT * FROM flight";
 			PreparedStatement stmt = conn.prepareStatement(sql);

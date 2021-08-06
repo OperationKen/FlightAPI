@@ -48,7 +48,8 @@ public class FlightDAOTest {
 	
 	@Test
 	public void testCreate() throws SQLException {
-		try (Connection conn = DriverManager.getConnection(url, username, password)){
+		try{
+			Connection conn = DriverManager.getConnection(url, username, password);
 		    String sql = "select count(*) from flight;";  
 			Statement stmt = conn.createStatement();
 		    ResultSet rs = stmt.executeQuery(sql);
@@ -79,7 +80,8 @@ public class FlightDAOTest {
 	
 	@Test
 	public void testUpdate() throws SQLException{
-		try(Connection conn = DriverManager.getConnection(url, username, password)){
+		try {
+			Connection conn = DriverManager.getConnection(url, username, password);
 		    String sql = "select count(*) from flight;";
 		    Statement stmt = conn.createStatement();
 		    ResultSet rs = stmt.executeQuery(sql);
@@ -97,13 +99,15 @@ public class FlightDAOTest {
 	
 	@Test
 	public void testDelete() throws SQLException {
-		try(Connection conn = DriverManager.getConnection(url, username, password)) {
+		try {
+			Connection conn = DriverManager.getConnection(url, username, password);
 		    String sql = "select count(*) from flight;";
 			Statement stmt = conn.createStatement();
 		    ResultSet rs = stmt.executeQuery(sql);
 		    rs.next();
 		    //Moves cursor to last row
 		    int noDel = rs.getInt("count(*)");
+		    
 		    FlightDAO.delete(3);
 		    ResultSet rs2 = stmt.executeQuery(sql);
 		    rs2.next();

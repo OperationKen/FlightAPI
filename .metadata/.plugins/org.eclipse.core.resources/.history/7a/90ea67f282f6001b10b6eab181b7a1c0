@@ -1,11 +1,10 @@
 package com.skillstorm.beans;
 
 import java.sql.Date;
-import java.util.Objects;
 
-public class Flight implements Comparable<Flight>{
+//map to the database table
+public class Flight {
 	
-	//Mapping out the database.
 	private int id;
 	private String fromAirport;
 	private String toAirport;
@@ -94,33 +93,6 @@ public class Flight implements Comparable<Flight>{
 	public String toString() {
 		return "Flight [id=" + id + ", fromAirport=" + fromAirport + ", toAirport=" + toAirport + ", departure="
 				+ departure + ", arrival=" + arrival + ", flightNumber=" + flightNumber + "]";
-	}
-
-	
-	
-	@Override
-	public int hashCode() {
-		return Objects.hash(arrival, departure, flightNumber, fromAirport, id, toAirport);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Flight other = (Flight) obj;
-		return Objects.equals(arrival, other.arrival) && Objects.equals(departure, other.departure)
-				&& Objects.equals(flightNumber, other.flightNumber) && Objects.equals(fromAirport, other.fromAirport)
-				&& id == other.id && Objects.equals(toAirport, other.toAirport);
-	}
-
-	@Override
-	public int compareTo(Flight other) {
-		// TODO Auto-generated method stub
-		return this.id - other.id;
 	}
 	
 	

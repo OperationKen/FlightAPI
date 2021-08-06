@@ -61,7 +61,6 @@ INDEX VERSION 1.131+C:\Users\kenne\Documents\Skillstorm\Project 1\.metadata\.plu
 517022965.index
 4225642972.index
 466941147.index
-382831797.index
 4235603856.index
 1402627554.index
 1593108857.index
