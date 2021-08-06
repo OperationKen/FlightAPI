@@ -85,8 +85,6 @@ public class FlightDAOTest {
 		    Statement stmt = conn.createStatement();
 		    ResultSet rs = stmt.executeQuery(sql);
 		    rs.next();
-		    
-		    //Using the last entry to test.
 		    int newId = rs.getInt("count(*)");
 		    Flight beforeUp = FlightDAO.findByID(newId);
 		    FlightDAO.update(new Flight(newId, "KEN", "NEW", "6", "1", "5"));
@@ -111,7 +109,6 @@ public class FlightDAOTest {
 		    ResultSet rs2 = stmt.executeQuery(sql);
 		    rs2.next();
 		    int delAfter = rs2.getInt("count(*)");
-		    //Compare the size after deleting.
 		    assertTrue(delAfter < noDel);
 		    
 		}catch(Exception e) {

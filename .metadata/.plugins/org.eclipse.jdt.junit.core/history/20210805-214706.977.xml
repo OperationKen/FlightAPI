@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="FlightDAOTest (1)" project="flight-api" tests="2" started="2" failures="0" errors="0" ignored="0">
-  <testsuite name="com.skillstorm.data.FlightDAOTest" time="0.118" displayname="FlightDAOTest" uniqueid="[engine:junit-vintage]/[runner:com.skillstorm.data.FlightDAOTest]">
-    <testcase name="testCreate" classname="com.skillstorm.data.FlightDAOTest" time="0.076" displayname="testCreate" uniqueid="[engine:junit-vintage]/[runner:com.skillstorm.data.FlightDAOTest]/[test:testCreate(com.skillstorm.data.FlightDAOTest)]"/>
-    <testcase name="testUpdate" classname="com.skillstorm.data.FlightDAOTest" time="0.042" displayname="testUpdate" uniqueid="[engine:junit-vintage]/[runner:com.skillstorm.data.FlightDAOTest]/[test:testUpdate(com.skillstorm.data.FlightDAOTest)]"/>
-  </testsuite>
-</testrun>

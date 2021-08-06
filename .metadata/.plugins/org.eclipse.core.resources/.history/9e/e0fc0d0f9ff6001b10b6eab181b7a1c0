@@ -24,8 +24,6 @@ public class FlightDAO {
 	static String password = "root";
 	private static FlightDAO instance;
 	
-	//Instantiate the object in case this class is empty.
-	//Force of habit.
 	public FlightDAO() {
 		
 	}
@@ -36,7 +34,6 @@ public class FlightDAO {
 		return instance;
 	}
 	
-	//If driver doesn't load, it will throw an error back.
     static {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");

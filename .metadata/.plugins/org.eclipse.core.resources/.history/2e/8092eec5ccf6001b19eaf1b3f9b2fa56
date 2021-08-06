@@ -41,7 +41,6 @@ public class FlightDAOTest {
 			//Hardcoded for the intention to Delete data
 			Statement stmt4 = conn.createStatement();
 			stmt4.executeUpdate("INSERT INTO flight VALUES(3, 6, 7, 8, 9, 10);");
-			//3 initial database values
 		}catch(Exception e) {
 			fail();
 		}
@@ -59,8 +58,8 @@ public class FlightDAOTest {
 		    FlightDAO.create(new Flight("D3W", "DEN", "2020-05-06", "2020-05-07", "12345-6567"));
 		    ResultSet rs2 = stmt.executeQuery(sql);
 		    rs2.next();
-		    //Last Row -> Checking if it inserted 3. Table is initially empty, but adding 3 should give us 6 total entries.
-		    //Column Index 1 = id -> Checking the 6th id since it is auto-incremented.
+		    //Last Row -> Checking if it inserted 3. Table is initially empty, but adding 3 should give us 3 entries.
+		    //Column Index 1 = id -> Checking the third id since it is auto-incremented.
 		    int lastRow = rs2.getInt(1);
 		    assertEquals(lastRow, 6);
 		}catch(Exception e) {
@@ -85,8 +84,6 @@ public class FlightDAOTest {
 		    Statement stmt = conn.createStatement();
 		    ResultSet rs = stmt.executeQuery(sql);
 		    rs.next();
-		    
-		    //Using the last entry to test.
 		    int newId = rs.getInt("count(*)");
 		    Flight beforeUp = FlightDAO.findByID(newId);
 		    FlightDAO.update(new Flight(newId, "KEN", "NEW", "6", "1", "5"));
@@ -111,7 +108,6 @@ public class FlightDAOTest {
 		    ResultSet rs2 = stmt.executeQuery(sql);
 		    rs2.next();
 		    int delAfter = rs2.getInt("count(*)");
-		    //Compare the size after deleting.
 		    assertTrue(delAfter < noDel);
 		    
 		}catch(Exception e) {
